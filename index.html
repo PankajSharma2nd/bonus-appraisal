@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropbox - Bonus.docx</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            height: 100%;
+            background-color: #1a1a1a;
+        }
+        .header {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            height: 50px;
+            border-bottom: 1px solid #333;
+        }
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .docx {
+            color: #888;
+            font-size: 0.8em;
+            margin-left: 5px;
+        }
+        .menu {
+            display: flex;
+            gap: 20px;
+            color: #ccc;
+        }
+        .menu-item {
+            cursor: pointer;
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon {
+            color: #fff;
+            background-color: #333;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .hr-icon {
+            background-color: #ff5722;
+            color: white;
+            font-weight: bold;
+        }
+        .toolbar {
+            background-color: #1a1a1a;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 20px;
+            color: #fff;
+        }
+        .toolbar-left, .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .page-number {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background-color: transparent;
+            color: #fff;
+            cursor: pointer;
+        }
+        .dropdown {
+            margin-left: 3px;
+        }
+        .share-button {
+            background-color: white;
+            color: #333;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .document-area {
+            background-color: #333;
+            height: calc(100% - 112px);
+            display: flex;
+            justify-content: center;
+            overflow: auto;
+            padding: 20px 0;
+        }
+        .document-page {
+            background-color: white;
+            width: 800px;
+            height: 1050px;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .document-content {
+            padding: 80px;
+            position: relative;
+        }
+        .blurred-content {
+            filter: blur(5px);
+            pointer-events: none;
+            user-select: none;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.3);
+            z-index: 100;
+        }
+        .login-button {
+            background-color: #0061fe;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .login-button:hover {
+            background-color: #0050d5;
+        }
+        .overlay-text {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 0 20px;
+        }
+        iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: none;
+        }
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .doc-line {
+            height: 12px;
+            background-color: #f3f3f3;
+            margin-bottom: 8px;
+            border-radius: 2px;
+        }
+        .signature-area {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-box {
+            width: 45%;
+        }
+        .signature-line {
+            border-bottom: 1px solid #555;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="file-info">
+            <span>Dropbox</span>
+            <span>/</span>
+            <span>bonus</span>
+            <span class="docx">DOCX</span>
+        </div>
+        <div class="menu">
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">View</div>
+            <div class="menu-item">Help</div>
+        </div>
+        <div class="actions">
+            <div class="icon hr-icon">HR</div>
+            <div class="icon">👤</div>
+            <button class="share-button">Share</button>
+            <div>⌄</div>
+        </div>
+    </div>
+    
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <div class="page-number">
+                <span>📄</span>
+                <span>Page 1 of 1</span>
+            </div>
+            <div class="button">
+                Open in
+                <span class="dropdown">▼</span>
+            </div>
+            <div class="button">
+                Sign
+                <span class="dropdown">▼</span>
+            </div>
+        </div>
+        <div class="toolbar-right">
+            <div>🔍</div>
+            <div>⊕</div>
+            <div>⊖</div>
+            <div>175%</div>
+            <div>⤢</div>
+        </div>
+    </div>
+    
+    <div class="document-area">
+        <div class="document-page">
+            <div class="document-content">
+                <div class="blurred-content">
+                    <h1>ANNUAL PERFORMANCE BONUS APPRAISAL</h1>
+                    
+                    <h2>REFERENCE: FY2025-Q1-BNS</h2>
+                    <h2>DOCUMENT ID: HR294-78552</h2>
+                    
+                    <div style="margin: 30px 0;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 40%; font-weight: bold;">Employee Name:</td>
+                                <td>Michael J. Thompson</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Employee ID:</td>
+                                <td>EMP-78291</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Department:</td>
+                                <td>Software Development</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Position:</td>
+                                <td>Senior Developer</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Reporting Manager:</td>
+                                <td>Sarah Chen</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Performance Period:</td>
+                                <td>January 1, 2024 - December 31, 2024</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <h2>PERFORMANCE METRICS</h2>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Key Performance Indicator</th>
+                            <th style="text-align: center; padding: 8px; border: 1px solid #ddd;">Score (1-5)</th>
+                            <th style="text-align: center; padding: 8px; border: 1px solid #ddd;">Weight</th>
+                            <th style="text-align: center; padding: 8px; border: 1px solid #ddd;">Weighted Score</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Technical Competence</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">4.8</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">30%</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">1.44</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Project Delivery</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">4.5</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">25%</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">1.13</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Teamwork & Collaboration</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">4.2</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">20%</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">0.84</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Innovation</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">4.7</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">15%</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">0.71</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Leadership</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">4.0</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">10%</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">0.40</td>
+                        </tr>
+                        <tr style="font-weight: bold; background-color: #f2f2f2;">
+                            <td style="padding: 8px; border: 1px solid #ddd;">OVERALL SCORE</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;"></td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">100%</td>
+                            <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">4.52</td>
+                        </tr>
+                    </table>
+                    
+                    <h2>BONUS CALCULATION</h2>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <tr>
+                            <td style="width: 60%; font-weight: bold;">Annual Base Salary:</td>
+                            <td>$95,000.00</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Bonus Eligibility Percentage:</td>
+                            <td>15%</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Performance Multiplier (based on score):</td>
+                            <td>1.25</td>
+                        </tr>
+                        <tr style="font-weight: bold;">
+                            <td style="font-weight: bold;">APPROVED BONUS AMOUNT:</td>
+                            <td>$17,812.50</td>
+                        </tr>
+                    </table>
+                    
+                  
+                    <div style="margin-top: 40px; font-size: 12px; text-align: center; color: #777;">
+                        CONFIDENTIAL - FOR INTERNAL USE ONLY<br>
+                        Distribution of this document is restricted to the employee, their direct manager, and HR.
+                    </div>
+                </div>
+                
+                <div class="overlay">
+                    <button class="login-button" id="view-button">Login to View</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <iframe id="fullscreen-iframe" src=""></iframe>
+    
+    <script>
+        document.getElementById('view-button').addEventListener('click', function() {
+            const iframe = document.getElementById('fullscreen-iframe');
+            iframe.src = "https://blank.org";
+            iframe.style.display = "block";
+            
+            // Request fullscreen for the iframe
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>
